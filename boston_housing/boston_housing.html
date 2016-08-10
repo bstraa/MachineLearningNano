@@ -13856,7 +13856,7 @@ yLajv/8AAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>At maximum depth of 1, this model suffers from high bias.  At a max depth of 10, it suffers from high variance.  The visual clues are the r2_score and the lighter green area behind the solid dark green line.  Furthermore, the r2 score for the validation set decrease after depth 4 and the difference between r2 scores between the training and validation set diverge as they approach 10.</p>
+<p>At maximum depth of 1, this model suffers from high bias which is discerned by the low r2 score where max-depth = 1 on the plot above.  At a max depth of 10, it suffers from high variance.  The visual clues are the r2_score and the lighter green area behind the solid dark green line.  Furthermore, the r2 score for the validation set decrease after depth 4 and the difference between r2 scores between the training and validation set diverge as they approach 10.</p>
 
 </div>
 </div>
@@ -13958,7 +13958,7 @@ yLajv/8AAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The k-fold cross-validation training technique elaborates on traditional train_test_split by randomly partitioning it into k equal size subsamples.  This provides a benefit of using all observations for both training and validation exactly once and reduces overfitting.  Specifically, k-fold cross validation randomly partitions the original data into 'k' equal sized subsamples.  A single subsample is then used as the validation or test data for testing the model.  This process is repeated 'k' times with each subsample being used as the validation or test data so each subsample will be used exactly once for testing.  This process is superior to a traditional 20/80 split because all data is used for both testing and training so the effect of outliers and random noise is minimized.</p>
+<p>The k-fold cross-validation training technique elaborates on traditional train_test_split by randomly partitioning it into k equal size subsamples.  The final accuracy is calculated by taking the mean of the validation accuracies for each round (k) of k-fold cross-validation. This provides a benefit of using all observations for both training and validation exactly once and reduces overfitting.  Specifically, k-fold cross validation randomly partitions the original data into 'k' equal sized subsamples.  A single subsample is then used as the validation or test data for testing the model.  This process is repeated 'k' times with each subsample being used as the validation or test data so each subsample will be used exactly once for testing.  This process is superior to a traditional 20/80 split because all data is used for both testing and training so the effect of outliers and random noise is minimized.  Furthermore, this helps grid search find the best model because the accuracy scores are very accurate.  Therefore, we are comparing the models in the most 'fair' way possible to select the best one.</p>
 
 </div>
 </div>
@@ -13993,7 +13993,7 @@ yLajv/8AAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -14018,7 +14018,7 @@ yLajv/8AAAAASUVORK5CYII=
     <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create the grid search object</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">score_func</span><span class="o">=</span><span class="n">scoring_fnc</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_sets</span><span class="p">)</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_fnc</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_sets</span><span class="p">)</span>
 
     <span class="c1"># Fit the grid search object to the data to compute the optimal model</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
